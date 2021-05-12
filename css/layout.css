@@ -1,0 +1,42 @@
+.container{
+    background-image: url(../images/background.jpg); ;
+    background-position: center;
+    border: 1px cadetblue;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+}
+.start-screen{
+    width: 60%;
+    margin: 20px auto;
+}
+.instruction-wrapper{
+    text-align: center;
+    position: relative;
+}
+
+.play-btn{
+    width: 60%;
+    background: none;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid white;
+    font-size: 20px;
+    margin-top: 40px;
+    background:rgb(96 ,115, 122, 0.3)
+}
+.instruction,.scores{
+    width: 60%;
+    margin: 30px auto;
+    padding: 5px;
+    height: 100px;
+    border: 1px solid white;
+    color: white;
+    background:rgb(96 ,115, 122, 0.3)
+
+}
+
+h1 {
+    color: white;
+}
