@@ -3,7 +3,7 @@
     background-position: center;
     border: 1px cadetblue;
     width: 100%;
-    height: 700px;
+    min-height: 100%;
     overflow: hidden;
 }
 .start-screen{
