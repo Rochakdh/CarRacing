@@ -7,7 +7,7 @@ let startScreen = document.querySelector('.start-screen')
 let endScreen = document.querySelector('.end-screen')
 let buttonStart = document.querySelector('.play-btn')
 let buttonHome = document.querySelector('.home-btn')
-
+let endScore = document.querySelector('.current-score')
 let possileObstacle = [100,300,500]
 let position = 100
 let obstacleOffset = 60
@@ -21,7 +21,6 @@ function randomItem(items)
 {
     return items[Math.floor(Math.random()*items.length)]; 
 }
-
 
 class Race {
     constructor(y){
@@ -56,8 +55,9 @@ class Race {
 
     collision = () => {
         if (this.x === position && Math.abs(canvas.height-playerHeight - this.y) < 160 ) {
-            console.log('game over')
+            endScore.textContent = `Score: ${score}`
             score = 0
+            cancelAnimationFrame(animate)
             startScreen.style.display = 'none'
             canvas.style.display = 'none'
             endScreen.style.display = 'block'
@@ -69,7 +69,6 @@ function init(){
     race = new Race(-100)
     raceSecond = new Race(-500)
     raceThird = new Race(-900)
-    // race.loadImage();
 }
 function animate() {
     requestAnimationFrame(animate);
@@ -85,18 +84,15 @@ function animate() {
     race.collision();
     raceSecond.collision()
     raceThird.collision()
+    
 }
-
-init()
-animate()
-
-
 
 buttonStart.addEventListener('click', function(){
     startScreen.style.display = 'none'
     endScreen.style.display = 'none'
     canvas.style.display = 'block'
     init();
+    animate()
 }
 );
 
@@ -107,6 +103,7 @@ buttonHome.addEventListener('click', function(){
     init();
 }
 );
+
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowLeft' && position > 100)
       position -= 200 ;
