@@ -2,6 +2,11 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+c.font = "30px Arial";
+let startScreen = document.querySelector('.start-screen')
+let endScreen = document.querySelector('.end-screen')
+let buttonStart = document.querySelector('.play-btn')
+let buttonHome = document.querySelector('.home-btn')
 
 let possileObstacle = [100,300,500]
 let position = 100
@@ -10,7 +15,7 @@ let roadY = 0
 let roadX = 300
 let speed = 2
 let playerHeight;
-
+let score = 0
 
 function randomItem(items)
 {
@@ -52,6 +57,10 @@ class Race {
     collision = () => {
         if (this.x === position && Math.abs(canvas.height-playerHeight - this.y) < 160 ) {
             console.log('game over')
+            score = 0
+            startScreen.style.display = 'none'
+            canvas.style.display = 'none'
+            endScreen.style.display = 'block'
         }
     };
 };
@@ -65,6 +74,9 @@ function init(){
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
+    scoreDisplay = 'Score :' + score
+    score = score + 1
+    c.fillText(scoreDisplay, 10, 100);
     race.loadImage();
     race.loadCar();
     race.drawObstacle();
@@ -78,15 +90,23 @@ function animate() {
 init()
 animate()
 
-let button = document.querySelector('.play-btn')
-let startScreen = document.querySelector('.start-screen')
-button.addEventListener('click', function(){
+
+
+buttonStart.addEventListener('click', function(){
     startScreen.style.display = 'none'
+    endScreen.style.display = 'none'
     canvas.style.display = 'block'
     init();
 }
 );
 
+buttonHome.addEventListener('click', function(){
+    startScreen.style.display = 'block'
+    endScreen.style.display = 'none'
+    canvas.style.display = 'none'
+    init();
+}
+);
 document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowLeft' && position > 100)
       position -= 200 ;
