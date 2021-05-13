@@ -3,14 +3,15 @@ const c = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 let position = 100
-let obstacleOffset = 40
+let obstacleOffset = 60
 let roadY = 0
 let roadX = 300
 let speed = 2
+let playerHeight;
 
 class Race {
     constructor(y){
-        this.x = 0
+        this.x = 100
         this. y = y
     }
     loadImage = function(){
@@ -25,18 +26,26 @@ class Race {
     loadCar = function(){
         let carImage = new Image();
         carImage.src = 'images/police.png'
+        playerHeight = carImage.height
         c.drawImage(carImage,roadX+position,canvas.height-carImage.height)
     }
 
     drawObstacle = () => {
-        const obstacle = new Image();
+        let obstacle = new Image();
         obstacle.src = 'images/car.png';
         this.y += speed;
-        c.drawImage(obstacle,roadX+obstacleOffset+this.x,this.y);
+        c.drawImage(obstacle,roadX+this.x-obstacleOffset,this.y);
         if (this.y > canvas.height + 10) {
             this.y = -400;
         }
     }
+
+    collision = () => {
+        // console.log(Math.abs(canvas.height-playerHeight - this.y))
+        if (this.x === position && Math.abs(canvas.height-playerHeight - this.y) < 160 ) {
+            console.log('collison')
+        }
+    };
 };
 let race;
 function init(){
@@ -49,6 +58,7 @@ function animate() {
     race.loadImage();
     race.loadCar();
     race.drawObstacle(-100);
+    race.collision();
 }
 
 init()
