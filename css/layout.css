@@ -8,7 +8,7 @@
 }
 .start-screen{
     width: 60%;
-    margin: 20px auto;
+    margin: 80px auto;
 }
 .instruction-wrapper{
     text-align: center;
@@ -39,4 +39,8 @@
 
 h1 {
     color: white;
+}
+
+canvas{
+    display: none;
 }
